@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "144823733795",
+    "project_id": "bankee-mvvm",
+    "storage_bucket": "bankee-mvvm.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:144823733795:android:4bf36170b4d2baa533eb96",
+        "android_client_info": {
+          "package_name": "com.example.bankee_mvvm"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCtjpMhZZjl9oryZf-szVZv-YYgboAZiXA"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

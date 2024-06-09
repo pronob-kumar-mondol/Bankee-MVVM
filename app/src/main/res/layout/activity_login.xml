@@ -1,0 +1,185 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main"
+    android:background="@color/white"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".ui.Activity.Login_Activity">
+
+    <include layout="@layout/appbar"
+        android:id="@+id/appbar" />
+
+    <ProgressBar
+        android:id="@+id/progressBar"
+        android:layout_centerInParent="true"
+        android:visibility="invisible"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"/>
+
+    <TextView
+        android:id="@+id/txt1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Hi, Welcome Back! 👋"
+        android:layout_below="@+id/appbar"
+        android:textSize="30sp"
+        android:textStyle="bold"
+        android:layout_marginLeft="30dp"
+        android:layout_marginTop="40dp" />
+
+    <TextView
+        android:id="@+id/txt2"
+        android:layout_below="@+id/txt1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Lorem ipsum dolor sit amet, consectetur"
+        android:textSize="15sp"
+        android:textColor="@color/LightSteelBlue"
+        android:layout_marginLeft="30dp"/>
+
+    <RelativeLayout
+        android:id="@+id/layout1"
+        android:paddingVertical="20dp"
+        android:layout_marginTop="50dp"
+        android:layout_marginHorizontal="30dp"
+        android:layout_below="@+id/txt2"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <TextView
+            android:id="@+id/emailTxt"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Email"
+            android:paddingLeft="5dp"
+            android:fontFamily="@font/baloo_bhai"/>
+
+        <LinearLayout
+            android:layout_below="@+id/emailTxt"
+            android:id="@+id/forEmail"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:layout_width="match_parent"
+                app:endIconMode="none"
+                android:layout_height="match_parent">
+                <EditText
+                    android:id="@+id/emailEditTxt"
+                    android:layout_width="match_parent"
+                    android:background="@drawable/txtbar"
+                    android:layout_height="match_parent"
+                    android:textColorHint="@color/Neutral"
+                    android:textSize="12sp"/>
+
+
+            </com.google.android.material.textfield.TextInputLayout>
+
+        </LinearLayout>
+
+
+
+        <TextView
+            android:id="@+id/passTxt"
+            android:layout_below="@+id/forEmail"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Password"
+            android:paddingLeft="5dp"
+            android:fontFamily="@font/baloo_bhai"/>
+
+        <LinearLayout
+            android:id="@+id/forPass"
+            android:layout_below="@+id/passTxt"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:layout_width="match_parent"
+                app:endIconMode="password_toggle"
+                android:layout_height="match_parent">
+                <EditText
+                    android:id="@+id/passEditTxt"
+                    android:layout_width="match_parent"
+                    android:background="@drawable/txtbar"
+                    android:layout_height="match_parent"
+                    android:textColorHint="@color/Neutral"
+                    android:textSize="12sp"/>
+
+
+            </com.google.android.material.textfield.TextInputLayout>
+
+        </LinearLayout>
+
+
+        <LinearLayout
+            android:id="@+id/layout2"
+            android:layout_marginTop="10dp"
+            android:layout_below="@+id/forPass"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <CheckBox
+                android:layout_weight="1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Remember Me"/>
+
+            <TextView
+                android:id="@+id/forgetPass"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Forgot Password ?"
+                android:textColor="@color/NavyCosmos"
+                />
+
+
+
+        </LinearLayout>
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/btn"
+            android:layout_marginTop="20dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/layout2"
+            android:text="Sign In"
+            android:textAllCaps="false"
+            android:textColor="@color/white"
+            android:background="@drawable/button"/>
+
+
+
+    </RelativeLayout>
+
+    <LinearLayout
+        android:id="@+id/layout3"
+        android:layout_centerInParent="true"
+        android:layout_below="@+id/layout1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/baloo_bhai_2"
+            android:text="Don’t have an account? "
+            android:textColor="@color/LightSteelBlue"
+            android:textSize="15sp" />
+        <TextView
+            android:fontFamily="@font/baloo_bhai"
+            android:id="@+id/signUp"
+            android:textSize="15sp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="#2B7979"
+            android:text="Sign Up"/>
+
+    </LinearLayout>
+
+
+</RelativeLayout>

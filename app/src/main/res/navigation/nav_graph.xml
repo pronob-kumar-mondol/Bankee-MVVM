@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    app:startDestination="@id/homeFragment">
+
+    <fragment
+        android:id="@+id/homeFragment"
+        android:name="com.example.bankee_mvvm.ui.Fragment.Home_Fragment"
+        android:label="Home"
+        tools:layout="@layout/fragment_home_" />
+
+    <fragment
+        android:id="@+id/historyFragment"
+        android:name="com.example.bankee_mvvm.ui.Fragment.History_Fragment"
+        android:label="History"
+        tools:layout="@layout/fragment_history_" />
+
+
+    <fragment
+        android:id="@+id/myCardFragment"
+        android:name="com.example.bankee_mvvm.ui.Fragment.Card_Fragment"
+        android:label="My Card"
+        tools:layout="@layout/fragment_card_" />
+
+    <fragment
+        android:id="@+id/profileFragment"
+        android:name="com.example.bankee_mvvm.ui.Fragment.Profile_Fragment"
+        android:label="Profile"
+        tools:layout="@layout/fragment_profile_" />
+</navigation>
