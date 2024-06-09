@@ -9,4 +9,8 @@
     <color name="NavyCosmos">#57435C</color>
     <color name="TrendyPink">#9579A0</color>
     <color name="LavenderBlu">#CCCCFF</color>
+    <color name="pasteGreen">#2e8b57</color>
+    <color name="NeutralTwo">#E3E9ED</color>
+    <color name="lightRed">#FF474D</color>
+    <color name="Red">#FF0000</color>
 </resources>

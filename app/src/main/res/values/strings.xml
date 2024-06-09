@@ -2,4 +2,12 @@
     <string name="app_name">BAnkee-MVVM</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="wellcome_back">Wellcome Back!</string>
+    <string name="user_name">Pronob Kumar</string>
+    <string name="_1234_5678_9012_3456">1234 5678 9012 3456</string>
+    <string name="card_holder">Card Holder</string>
+    <string name="valid_till">Valid Till :</string>
+    <string name="_05_22">05/22</string>
+    <string name="buisness_platinum">Buisness Platinum</string>
+    <string name="leagal_policies">Leagal Policies</string>
 </resources>
