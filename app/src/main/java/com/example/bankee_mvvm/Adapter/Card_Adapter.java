@@ -10,12 +10,19 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.bankee_mvvm.Model.Card;
 import com.example.bankee_mvvm.R;
+import com.example.bankee_mvvm.ViewModel.Shared_ViewModel;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public class Card_Adapter extends RecyclerView.Adapter<Card_Adapter.CardHolder> {
     private List<Card> cards = new ArrayList<>();
+    private Shared_ViewModel sharedViewModel;
+
+    public Card_Adapter(List<Card> cards) {
+        this.cards = cards;
+    }
+
     @NonNull
     @Override
     public Card_Adapter.CardHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
@@ -33,6 +40,10 @@ public class Card_Adapter extends RecyclerView.Adapter<Card_Adapter.CardHolder> 
         holder.cardHolderNameTextView.setText(currentCard.getCardHolderName());
         holder.expirationDateTextView.setText(currentCard.getExpirationDate());
         holder.balanceTextView.setText(String.valueOf(currentCard.getBalance()));
+
+        holder.itemView.setOnClickListener(v -> {
+            sharedViewModel.selectCard(currentCard);
+        });
     }
 
     @Override

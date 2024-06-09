@@ -1,6 +1,7 @@
 package com.example.bankee_mvvm.ViewModel;
 
 import android.app.Application;
+import android.util.Log;
 
 import androidx.annotation.NonNull;
 import androidx.lifecycle.AndroidViewModel;
@@ -70,9 +71,12 @@ public class Card_ViewModel extends AndroidViewModel {
         if (currentUser != null) {
             String userId = currentUser.getUid();
             String cardId = database.getReference("users").child(userId).child("cards").push().getKey();
-            database.getReference("users").child(userId).child("cards").child(cardId).setValue(card);
+            Log.d("Card_ViewModel", "Inserting card with ID: " + cardId); // Log before insertion
+            database.getReference("users").child(userId).child("cards").child(cardId).setValue(card)
+                    .addOnSuccessListener(aVoid -> Log.d("Card_ViewModel", "Card inserted successfully")) // Log on success
+                    .addOnFailureListener(e -> Log.e("Card_ViewModel", "Failed to insert card", e)); // Log on failure
         } else {
-            // Handle the case where the user is not logged in
+            Log.w("Card_ViewModel", "User not logged in, cannot insert card"); // Log if user is not logged in
         }
     }
 }

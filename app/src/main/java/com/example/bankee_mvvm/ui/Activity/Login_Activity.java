@@ -88,13 +88,11 @@ public class Login_Activity extends AppCompatActivity {
     @Override
     protected void onStart() {
         super.onStart();
-        if(authViewModel.getAuthStatus()!=null){
-            Intent intent=new Intent(Login_Activity.this,MainActivity.class);
-            intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
-            startActivity(intent);
-            finish();
-        }
-
+        authViewModel.getUserLiveData().observe(this, firebaseUser -> {
+            if (firebaseUser != null) {
+                navigateToHome(); // Navigate to MainActivity when user is logged in
+            }
+        });
     }
 
 

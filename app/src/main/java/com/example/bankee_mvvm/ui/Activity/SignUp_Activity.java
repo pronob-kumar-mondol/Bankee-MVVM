@@ -42,9 +42,7 @@ public class SignUp_Activity extends AppCompatActivity {
 
         authViewModel = new ViewModelProvider(this).get(Auth_ViewModel.class);
 
-        if (authViewModel.getUserLiveData().getValue() != null) {
-            navigateToHome();
-        }
+
 
         authViewModel.getUserLiveData().observe(this, new Observer<FirebaseUser>() {
             @Override
