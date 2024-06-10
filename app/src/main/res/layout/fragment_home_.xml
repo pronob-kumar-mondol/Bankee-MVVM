@@ -285,7 +285,7 @@
 
                         </RelativeLayout>
                         <RelativeLayout
-                            android:id="@+id/contacts"
+                            android:id="@+id/payBill"
                             android:layout_width="match_parent"
                             android:layout_weight="1"
                             android:clickable="true"
@@ -313,7 +313,7 @@
                                 android:layout_height="wrap_content"
                                 android:layout_below="@+id/contact_logo"
                                 android:layout_centerInParent="true"
-                                android:text="Contacts"
+                                android:text="Pay Bill"
                                 android:textColor="@color/black"
                                 android:textSize="20sp"
                                 android:textStyle="bold" />
@@ -323,7 +323,7 @@
                                 android:layout_height="wrap_content"
                                 android:layout_below="@+id/contact_Txt1"
                                 android:layout_centerInParent="true"
-                                android:text="Tap to Recharge"
+                                android:text="Tap to Pay Bill"
                                 android:textColor="@color/Neutral"
                                 android:textSize="13sp" />
 

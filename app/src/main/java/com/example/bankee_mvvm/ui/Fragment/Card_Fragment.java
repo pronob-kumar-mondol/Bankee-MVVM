@@ -23,6 +23,7 @@ import com.example.bankee_mvvm.CardSpacingItemDecoration;
 import com.example.bankee_mvvm.Model.Card;
 import com.example.bankee_mvvm.R;
 import com.example.bankee_mvvm.ViewModel.Card_ViewModel;
+import com.example.bankee_mvvm.ViewModel.Shared_ViewModel;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 import java.util.List;
@@ -34,7 +35,6 @@ public class Card_Fragment extends Fragment {
     private RecyclerView recyclerView;
     private ProgressBar progressBar;
     private Card_Adapter cardAdapter;
-    private FloatingActionButton addCardFab, deleteCardFab;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -44,13 +44,18 @@ public class Card_Fragment extends Fragment {
         noCardTextView = view.findViewById(R.id.no_card_text_view);
         progressBar = view.findViewById(R.id.progressBarCard);
         recyclerView = view.findViewById(R.id.recyclerView);
-        addCardFab = view.findViewById(R.id.add_card_fab);
-        deleteCardFab = view.findViewById(R.id.delete_card_fab);
+        FloatingActionButton addCardFab = view.findViewById(R.id.add_card_fab);
+        FloatingActionButton deleteCardFab = view.findViewById(R.id.delete_card_fab);
 
-        cardViewModel = new ViewModelProvider(this).get(Card_ViewModel.class);
+        // Get the ViewModelProviders from the parent activity
+        ViewModelProvider viewModelProvider = new ViewModelProvider(requireActivity());
+
+// Get the ViewModels
+        cardViewModel = viewModelProvider.get(Card_ViewModel.class);
+        Shared_ViewModel sharedViewModel = viewModelProvider.get(Shared_ViewModel.class);
 
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
-        cardAdapter = new Card_Adapter(null);
+        cardAdapter = new Card_Adapter(null, sharedViewModel,cardViewModel);
         recyclerView.setAdapter(cardAdapter);
 
         int spacingInPixels = getResources().getDimensionPixelSize(R.dimen.card_spacing);
@@ -95,35 +100,36 @@ public class Card_Fragment extends Fragment {
 
         final AlertDialog dialog = builder.create();
 
-        addCardButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                String cardNumber = cardNumberEditText.getText().toString().trim();
-                String cardHolderName = cardHolderNameEditText.getText().toString().trim();
-                String expirationDate = expirationDateEditText.getText().toString().trim();
-                String cvv = cvvEditText.getText().toString().trim();
-                String balanceStr = balanceEditText.getText().toString().trim();
-                double balance = balanceStr.isEmpty() ? 0.0 : Double.parseDouble(balanceStr);
+        addCardButton.setOnClickListener(v -> {
+            String cardNumber = cardNumberEditText.getText().toString().trim();
+            String cardHolderName = cardHolderNameEditText.getText().toString().trim();
+            String expirationDate = expirationDateEditText.getText().toString().trim();
+            String cvv = cvvEditText.getText().toString().trim();
+            String balanceStr = balanceEditText.getText().toString().trim();
+            double balance = balanceStr.isEmpty() ? 0.0 : Double.parseDouble(balanceStr);
 
-                if (!cardNumber.isEmpty() && !cardHolderName.isEmpty() && !expirationDate.isEmpty() && !cvv.isEmpty() && !balanceStr.isEmpty()) {
-                    Card card = new Card();
-                    card.setCardNumber(cardNumber);
-                    card.setCardHolderName(cardHolderName);
-                    card.setExpirationDate(expirationDate);
-                    card.setCvv(cvv);
-                    card.setBalance(balance);
-                    cardViewModel.insert(card);
+            if (!cardNumber.isEmpty() && !cardHolderName.isEmpty() && !expirationDate.isEmpty() && !cvv.isEmpty() && !balanceStr.isEmpty()) {
+                Card card = new Card();
+                card.setCardNumber(cardNumber);
+                card.setCardHolderName(cardHolderName);
+                card.setExpirationDate(expirationDate);
+                card.setCvv(cvv);
+                card.setBalance(balance);
+                // Set the newly created card as the default card
+                Shared_ViewModel sharedViewModel = new ViewModelProvider(this).get(Shared_ViewModel.class);
+                sharedViewModel.selectCard(card);
 
-                    dialog.dismiss();
-                } else {
-                    // Show error message if any field is empty
-                    // For simplicity, we can use Toast or set error on EditText fields
-                    cardNumberEditText.setError("Required");
-                    cardHolderNameEditText.setError("Required");
-                    expirationDateEditText.setError("Required");
-                    cvvEditText.setError("Required");
-                    balanceEditText.setError("Required");
-                }
+                cardViewModel.insert(card);
+
+                dialog.dismiss();
+            } else {
+                // Show error message if any field is empty
+                // For simplicity, we can use Toast or set error on EditText fields
+                cardNumberEditText.setError("Required");
+                cardHolderNameEditText.setError("Required");
+                expirationDateEditText.setError("Required");
+                cvvEditText.setError("Required");
+                balanceEditText.setError("Required");
             }
         });
 

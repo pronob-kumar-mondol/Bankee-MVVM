@@ -6,5 +6,6 @@
         <item>@font/montserrat_alternates_light</item>
         <item>@font/oswald</item>
         <item>@font/oswald_extralight</item>
+        <item>@font/teko_medium</item>
     </array>
 </resources>

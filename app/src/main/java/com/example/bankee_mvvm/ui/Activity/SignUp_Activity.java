@@ -17,7 +17,9 @@ import androidx.lifecycle.ViewModelProvider;
 import com.example.bankee_mvvm.MainActivity;
 import com.example.bankee_mvvm.R;
 import com.example.bankee_mvvm.ViewModel.Auth_ViewModel;
+import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.FirebaseDatabase;
 
 public class SignUp_Activity extends AppCompatActivity {
 
@@ -26,6 +28,8 @@ public class SignUp_Activity extends AppCompatActivity {
     private Button signupButton;
     private ProgressBar progressBar;
     private Auth_ViewModel authViewModel;
+    private FirebaseDatabase database = FirebaseDatabase.getInstance();
+    private FirebaseAuth auth = FirebaseAuth.getInstance();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -71,6 +75,7 @@ public class SignUp_Activity extends AppCompatActivity {
                 String fullName = fullNameEditText.getText().toString().trim();
                 String email = emailEditText.getText().toString().trim();
                 String password = passwordEditText.getText().toString().trim();
+                FirebaseUser currentUser = auth.getCurrentUser();
                 if (validateInputs(fullName, email, password)) {
                     authViewModel.signup(email, password, fullName);
                 } else {

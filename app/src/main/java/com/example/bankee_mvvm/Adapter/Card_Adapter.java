@@ -1,15 +1,18 @@
 package com.example.bankee_mvvm.Adapter;
 
+import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.AlertDialog;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.bankee_mvvm.Model.Card;
 import com.example.bankee_mvvm.R;
+import com.example.bankee_mvvm.ViewModel.Card_ViewModel;
 import com.example.bankee_mvvm.ViewModel.Shared_ViewModel;
 
 import java.util.ArrayList;
@@ -17,10 +20,13 @@ import java.util.List;
 
 public class Card_Adapter extends RecyclerView.Adapter<Card_Adapter.CardHolder> {
     private List<Card> cards = new ArrayList<>();
-    private Shared_ViewModel sharedViewModel;
+    private final Shared_ViewModel sharedViewModel;
+    private final Card_ViewModel cardViewModel;
 
-    public Card_Adapter(List<Card> cards) {
+    public Card_Adapter(List<Card> cards, Shared_ViewModel sharedViewModel,Card_ViewModel cardViewModel) {
         this.cards = cards;
+        this.sharedViewModel = sharedViewModel;
+        this.cardViewModel = cardViewModel;
     }
 
     @NonNull
@@ -42,9 +48,33 @@ public class Card_Adapter extends RecyclerView.Adapter<Card_Adapter.CardHolder> 
         holder.balanceTextView.setText(String.valueOf(currentCard.getBalance()));
 
         holder.itemView.setOnClickListener(v -> {
-            sharedViewModel.selectCard(currentCard);
+
+
+            AlertDialog.Builder builder = new AlertDialog.Builder(v.getContext());
+            builder.setTitle("Choose an option")
+                    .setItems(new CharSequence[]{"Set Default", "Delete"}, (dialog, which) -> {
+                        switch (which) {
+                            case 0: // Set Default
+                                sharedViewModel.selectCard(currentCard);
+                                break;
+                            case 1: // Delete
+
+                                deleteCard(v.getContext(), currentCard);
+                                break;
+                        }
+                    });
+            builder.create().show();
         });
     }
+
+    private void deleteCard(Context context, Card currentCard) {
+        new AlertDialog.Builder(context)
+                .setMessage("Are you sure you want to delete this card?")
+                .setPositiveButton("Delete", (dialog, which) -> cardViewModel.deleteCard(currentCard))
+                .setNegativeButton("Cancel", null)
+                .show();
+    }
+
 
     @Override
     public int getItemCount() {
@@ -56,11 +86,12 @@ public class Card_Adapter extends RecyclerView.Adapter<Card_Adapter.CardHolder> 
         notifyDataSetChanged();
     }
 
-    public class CardHolder extends RecyclerView.ViewHolder {
-        private TextView cardNumberTextView;
-        private TextView cardHolderNameTextView;
-        private TextView expirationDateTextView;
-        private TextView balanceTextView;
+
+    public static class CardHolder extends RecyclerView.ViewHolder {
+        private final TextView cardNumberTextView;
+        private final TextView cardHolderNameTextView;
+        private final TextView expirationDateTextView;
+        private final TextView balanceTextView;
         public CardHolder(@NonNull View itemView) {
             super(itemView);
             cardNumberTextView = itemView.findViewById(R.id.card_no);
@@ -69,4 +100,5 @@ public class Card_Adapter extends RecyclerView.Adapter<Card_Adapter.CardHolder> 
             balanceTextView = itemView.findViewById(R.id.balance);
         }
     }
+
 }
